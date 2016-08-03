@@ -6,7 +6,7 @@ var baseWebpackConfig = require('./webpack.base.conf')
 var cssLoaders = require('./css-loaders')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
-
+var CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
 var glob = require('glob');
 
 module.exports = merge(baseWebpackConfig, {
@@ -73,12 +73,21 @@ function getEntry(globPath) {
 
 var pages = getEntry('./src/module/**/*.html');
 
+var commonsChunkPluginConf = {
+  name: 'vendors',
+  chunks: Object.keys(pages),
+  // minChunks是指一个文件至少被require几次才会被放到CommonChunk里，如果minChunks等于2，说明一个文件至少被require两次才能放在CommonChunk里
+  minChunks: 2 // 提取所有chunks共同依赖的模块
+};
+module.exports.plugins.push(new CommonsChunkPlugin(commonsChunkPluginConf));
+
 for (var pathname in pages) {
   console.log(pathname);
   // 配置生成的html文件，定义路径等
   var conf = {
     // filename: pathname + '.html',
     filename: pathname + '.html',
+    chunks: ['vendors', pathname],
     template: pages[pathname], // 模板路径
     inject: true              // js插入位置
   };

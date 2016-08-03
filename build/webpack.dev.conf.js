@@ -3,7 +3,7 @@ var webpack = require('webpack')
 var merge = require('webpack-merge')
 var baseWebpackConfig = require('./webpack.base.conf')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
-
+var CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
 var glob = require('glob');
 
 // add hot-reload related code to entry chunks
@@ -44,14 +44,24 @@ function getEntry(globPath) {
 
 var pages = getEntry('./src/module/**/*.html');
 
+var commonsChunkPluginConf = {
+  name: 'vendors',
+  chunks: Object.keys(pages),
+  // minChunks是指一个文件至少被require几次才会被放到CommonChunk里，如果minChunks等于2，说明一个文件至少被require两次才能放在CommonChunk里
+  minChunks: 2 // 提取所有chunks共同依赖的模块
+};
+module.exports.plugins.push(new CommonsChunkPlugin(commonsChunkPluginConf));
+
 for (var pathname in pages) {
-	console.log(pathname);
+  console.log('pages=', Object.keys(pages), pages)
   // 配置生成的html文件，定义路径等
   var conf = {
     filename: pathname + '.html',
+    chunks: ['vendors', pathname],
     template: pages[pathname], // 模板路径
     inject: true              // js插入位置
   };
+  console.log(pathname, conf);
   // 需要生成几个html文件，就配置几个HtmlWebpackPlugin对象
   module.exports.plugins.push(new HtmlWebpackPlugin(conf));
 }
