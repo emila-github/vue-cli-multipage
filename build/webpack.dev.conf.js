@@ -44,10 +44,6 @@ function getEntry(globPath) {
     tmp = entry.split('/').splice(2);
     pathname = tmp.splice(0, tmp.length-1).join('/'); // 正确输出js和html的路径
     entries[pathname] = entry;
-    console.log('entry=', entry);
-    console.log('basename=', basename);
-    console.log('tmp=', tmp);
-    console.log('pathname=', pathname);
   });
 
 
