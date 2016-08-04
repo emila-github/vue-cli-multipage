@@ -2,12 +2,12 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title>Hello World</title>
+    <title>双向绑定</title>
 </head>
 <body>
-#  Hello World
 <div id="app">
-    {{ message }}
+    <p>{{ message }}</p>
+    <input v-model="message">
 </div>
 </body>
 </html>

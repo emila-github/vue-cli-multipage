@@ -1,3 +1,7 @@
-/**
- * Created by 17173 on 2016/8/4.
- */
+import Vue from 'vue'
+new Vue({
+  el: '#app',
+  data: {
+    message: 'Hello Vue.js!'
+  }
+})
