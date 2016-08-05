@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>条件渲染 -- v-if</title>
+</head>
+<body>
+
+<div id="demo">
+    <h1 v-if="ok">Yes</h1>
+    <h1 v-else>No</h1>
+
+    <template v-if="ok">
+        <h1>Title</h1>
+        <p>Paragraph 1</p>
+        <p>Paragraph 2</p>
+    </template>
+
+    <h1 v-show="ok">Hello!</h1>
+
+    <!--注意 v-show 不支持 <template> 语法。-->
+    <template v-show="ok">
+        <h1>Title show</h1>
+        <p>Paragraph show</p>
+        <p>Paragraph show</p>
+    </template>
+
+    <div v-if="Math.random() > 0.5">
+        Sorry
+    </div>
+    <div v-else>
+        Not sorry
+    </div>
+
+
+    <custom-component v-show="condition"></custom-component>
+    <p v-show="!condition">这可能也是一个组件</p>
+
+
+
+</div>
+
+
+
+
+
+
+</body>
+</html>
