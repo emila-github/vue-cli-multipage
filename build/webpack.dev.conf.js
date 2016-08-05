@@ -70,7 +70,7 @@ for (var pathname in pages) {
     template: pages[pathname], // 模板路径
     inject: true              // js插入位置
   };
-  console.log(pathname, conf);
+//  console.log(pathname, conf);
   // 需要生成几个html文件，就配置几个HtmlWebpackPlugin对象
   module.exports.plugins.push(new HtmlWebpackPlugin(conf));
 }
