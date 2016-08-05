@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>计算属性 vs. $watch</title>
+</head>
+<body>
+Vue.js 提供了一个方法 $watch，它用于观察 Vue 实例上的数据变动。当一些数据需要根据其它数据变化时， $watch 很诱人 —— 特别是如果你来自 AngularJS。不过，通常更好的办法是使用计算属性而不是一个命令式的 $watch 回调。考虑下面例子：
+
+
+<div id="demo">
+    {{firstName}}<br/>
+    {{lastName}}<br/>
+
+    fullName: {{fullName}} <br/>
+    firstName: <input v-model="firstName">
+    lastName: <input v-model="lastName">
+</div>
+
+
+<div id="demo2">
+    {{firstName}}<br/>
+    {{lastName}}<br/>
+    fullName: {{fullName2}}<br/>
+    firstName: <input v-model="firstName">
+    lastName: <input v-model="lastName">
+</div>
+
+
+<div id="demo3">
+    {{firstName}}<br/>
+    {{lastName}}<br/>
+    fullName: {{fullName}}<br/>
+    fullName: <input v-model="fullName">
+</div>
+
+
+
+
+</body>
+</html>
