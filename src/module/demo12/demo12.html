@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>列表渲染 -- v-for</title>
+</head>
+<body>
+
+<ul id="example-1">
+    <li v-for="item in items" track-by="$index">
+        {{ item.message }}
+    </li>
+
+    <li v-for="item in items">
+        {{ parentMessage }} - {{ $index }} - {{ item.message }}
+    </li>
+
+    <div v-for="(index, item) in items">
+        {{ index }} {{ item.message }}
+    </div>
+
+    <div v-for="item of items">
+        {{ parentMessage }} - {{ $index }} - {{ item.message }}
+    </div>
+
+    <div>
+        <span v-for="n in 10">{{ n }} </span>
+    </div>
+
+</ul>
+
+
+<ul>
+    <template v-for="item in items">
+        <li>{{ item.message }}</li>
+        <li class="divider"></li>
+    </template>
+</ul>
+
+
+<ul id="repeat-object" class="demo">
+    <li v-for="value in object">
+        {{ $key }} : {{ value }}
+    </li>
+</ul>
+
+
+
+</body>
+</html>
