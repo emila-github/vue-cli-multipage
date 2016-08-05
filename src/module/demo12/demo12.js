@@ -20,10 +20,12 @@ var example1 = new Vue({
 //})
 
 
+
 // 对象 v-for
 // 提交测试一
 // 提交测试二
 // 提交测试三
+
 new Vue({
   el: '#repeat-object',
   data: {
