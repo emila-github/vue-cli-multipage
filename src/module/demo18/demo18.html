@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>动态 Props</title>
+</head>
+<body>
+
+<div id="example">
+    <div>
+        <input v-model="parentMsg">
+        <br>
+        <child v-bind:my-message="parentMsg"></child>
+    </div>
+</div>
+
+
+
+</body>
+</html>
