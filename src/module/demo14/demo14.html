@@ -2,13 +2,19 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title>CSS 过渡</title>
+    <title>嵌套路由</title>
 </head>
 <body>
 
-<div id="demo">
-    <div v-if="show" transition="expand">hello</div>
-    <button @click="show = !show">Toggle</button>
+<div id="app">
+    <h1>Hello App!</h1>
+    <p>
+        <!-- 使用指令 v-link 进行导航。 -->
+        <a v-link="{ path: '/foo' }">Go to Foo</a>
+        <a v-link="{ path: '/bar' }">Go to Bar</a>
+    </p>
+    <!-- 路由外链 -->
+    <router-view></router-view>
 </div>
 
 
