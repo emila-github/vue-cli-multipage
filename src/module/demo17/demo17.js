@@ -23,3 +23,7 @@ new Parent({
   el: '#examplea'
 })
 
+new Vue({
+  el: '#exampleb'
+})
+
