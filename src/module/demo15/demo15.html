@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>嵌套路由</title>
+</head>
+<body>
+
+<div id="app">
+    <h1>Hello App!</h1>
+    <p>
+        <!-- 使用指令 v-link 进行导航。 -->
+        <a v-link="{ path: '/foo' }">Go to Foo</a>
+        <a v-link="{ path: '/bar' }">Go to Bar</a>
+    </p>
+    <!-- 路由外链 -->
+    <router-view></router-view>
+</div>
+
+
+
+</body>
+</html>
