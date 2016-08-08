@@ -2,22 +2,27 @@ var Vue = require('vue')
 
 // 在一个步骤中扩展与注册
 Vue.component('my-component', {
-  template: '<div>A custom component!</div>'
+  props:['d1'],
+  template: '<div>A custom component{{d1}}!</div>'
 })
 
 // 局部注册也可以这么做
 var Parent = Vue.extend({
-  template: '<div><my-a></my-a></div>',
+  template: '<div><my-a d2="parent"></my-a></div>',
   components: {
     'my-a': {
-      template: '<div>B custom component!</div>'
+      props:['d2'],
+      template: '<div>B custom component{{d2}}!</div>'
     }
   }
 })
 
 // 创建根实例
 new Vue({
-  el: '#example'
+  el: '#example',
+  data:{
+    d1:'d1'
+  }
 })
 new Parent({
   el: '#examplea'
