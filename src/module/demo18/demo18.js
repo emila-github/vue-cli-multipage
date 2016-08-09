@@ -2,7 +2,15 @@ var Vue = require('vue')
 // 定义
 Vue.component('child', {
   // camelCase in JavaScript
-  props: ['myMessage'],
+//  props: ['myMessage'],
+  props: {
+    myMessage: {
+      validator: function (value) {
+        return parseInt(value, 10) > 10
+      },
+      type: String
+    }
+  },
   template: '<span>{{ myMessage }}</span>'
 })
 
@@ -13,7 +21,7 @@ Vue.component('child', {
 new Vue({
   el: '#example',
   data: {
-    parentMsg: 'Message from parent'
+    parentMsg: '15'
   }
 })
 
