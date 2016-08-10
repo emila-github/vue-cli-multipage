@@ -2,16 +2,20 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title>动态 Props/  Prop 验证</title>
+    <title>自定义事件</title>
 </head>
 <body>
 
-<div id="example">
-    <div>
-        <input v-model="parentMsg">
-        <br>
-        <child :my-message="parentMsg"></child>
-    </div>
+<!-- 子组件模板 -->
+<template id="child-template">
+    <input v-model="msg">
+    <button v-on:click="notify">Dispatch Event</button>
+</template>
+
+<!-- 父组件模板 -->
+<div id="events-example">
+    <p>Messages: {{ messages | json }}</p>
+    <child></child>
 </div>
 
 
