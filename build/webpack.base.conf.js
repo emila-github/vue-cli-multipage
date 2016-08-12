@@ -6,6 +6,8 @@ var projectRoot = path.resolve(__dirname, '../')
 var glob = require('glob');
 var entries = getEntry('./src/module/**/*.js'); // 获得入口js文件
 
+
+
 module.exports = {
   entry: entries,
   output: {

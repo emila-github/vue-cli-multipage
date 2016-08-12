@@ -1,4 +1,6 @@
 var path = require('path')
+var fs = require("fs")
+var glob = require("glob")
 var express = require('express')
 var webpack = require('webpack')
 var config = require('../config')
@@ -15,6 +17,8 @@ var proxyTable = config.dev.proxyTable
 
 var app = express()
 var compiler = webpack(webpackConfig)
+
+
 
 var devMiddleware = require('webpack-dev-middleware')(compiler, {
   publicPath: webpackConfig.output.publicPath,
@@ -36,11 +40,47 @@ compiler.plugin('compilation', function (compilation) {
 // proxy api requests
 Object.keys(proxyTable).forEach(function (context) {
   var options = proxyTable[context]
+  console.log(options)
   if (typeof options === 'string') {
     options = { target: options }
   }
   app.use(proxyMiddleware(context, options))
 })
+
+/* Configure a simple logger and an error handler. */
+//app.use(morgan('combined'));
+//app.use(errorhandler());
+
+/* Read the directory tree according to the pattern specified above. */
+var files = glob.sync(config.build.mockRootPattern);
+
+/* Register mappings for each file found in the directory tree. */
+if(files && files.length > 0) {
+  files.forEach(function(fileName) {
+
+    var mapping = config.build.apiRoot + fileName.replace(config.build.mockRoot, '').replace(config.build.mockFilePattern,'');
+
+    app.get(mapping, function (req, res) {
+      var data =  fs.readFileSync(fileName, 'utf8');
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.write(data);
+      res.end();
+    });
+
+    console.log('Registered mapping: %s -> %s', mapping, fileName);
+  })
+} else {
+  console.log('No mappings found! Please check the configuration.');
+}
+//app.get('/mocks/add.do.js', function (req, res) {
+//  res.send('Hello World!');
+//});
+
+/* Start the API mock server. */
+console.log('Application root directory: [' + config.build.applicationRoot +']');
+//console.log('Mock Api Server listening: [http://' + ipaddress + ':' + port + ']');
+
+
 
 // handle fallback for HTML5 history API
 app.use(require('connect-history-api-fallback')())
@@ -52,9 +92,12 @@ app.use(devMiddleware)
 // compilation error display
 app.use(hotMiddleware)
 
+
 // serve pure static assets
 var staticPath = path.join(config.build.assetsPublicPath, config.build.assetsSubDirectory)
 app.use(staticPath, express.static('./static'))
+
+
 
 module.exports = app.listen(port, function (err) {
   if (err) {
