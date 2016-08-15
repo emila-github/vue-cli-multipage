@@ -8,3 +8,7 @@ var applicationRoot = __dirname.replace(/\\/g,"/"),
 
 var files = glob.sync(mockRootPattern);
 console.log('files---------------',files);
+
+files.map(function(file) {
+  console.log(path.basename(file, path.extname(file)));
+});

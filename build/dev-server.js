@@ -61,15 +61,23 @@ var files = glob.sync(config.build.mockRootPattern);
 /* Register mappings for each file found in the directory tree. */
 if(files && files.length > 0) {
   files.forEach(function(fileName) {
+    console.log('fileName=%s',fileName)
+    var extname = path.extname(fileName);
+    //var mapping = config.build.apiRoot + fileName.replace(config.build.mockRoot, '').replace(config.build.mockFilePattern,'');
+    var mapping = config.build.apiRoot + fileName.replace(config.build.mockRoot, '').replace(extname,'');
 
-    var mapping = config.build.apiRoot + fileName.replace(config.build.mockRoot, '').replace(config.build.mockFilePattern,'');
+    if(extname === '.json') {
+      app.get(mapping, function (req, res) {
+        var data =  fs.readFileSync(fileName, 'utf8');
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.write(data);
+        res.end();
+      });
+    }
+    else if(extname === '.js') {
+      app.get(mapping, require(fileName));
+    }
 
-    app.get(mapping, function (req, res) {
-      var data =  fs.readFileSync(fileName, 'utf8');
-      res.writeHead(200, { 'Content-Type': 'application/json' });
-      res.write(data);
-      res.end();
-    });
 
     console.log('Registered mapping: %s -> %s', mapping, fileName);
   })
