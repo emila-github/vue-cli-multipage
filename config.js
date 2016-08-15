@@ -3,7 +3,8 @@ var path = require('path')
 
 var applicationRoot = __dirname.replace(/\\/g,"/"),
   mockRoot = applicationRoot + '/mocks/api',
-  mockFilePattern = '.json',
+  mockFilePattern = '.?(json|js)',
+  //mockFilePattern = '.json',
   mockRootPattern = mockRoot + '/**/*' + mockFilePattern,
   apiRoot = '/api';
 

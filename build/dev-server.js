@@ -51,8 +51,12 @@ Object.keys(proxyTable).forEach(function (context) {
 //app.use(morgan('combined'));
 //app.use(errorhandler());
 
+//var joinController = require('../mocks/api/add.do.js');
+//app.get('/mocks/api/add.do.js', joinController);
+
 /* Read the directory tree according to the pattern specified above. */
 var files = glob.sync(config.build.mockRootPattern);
+
 
 /* Register mappings for each file found in the directory tree. */
 if(files && files.length > 0) {
