@@ -67,7 +67,7 @@ if(files && files.length > 0) {
     var mapping = config.build.apiRoot + fileName.replace(config.build.mockRoot, '').replace(extname,'');
 
     if(extname === '.json') {
-      app.get(mapping, function (req, res) {
+      app.all(mapping, function (req, res) {
         var data =  fs.readFileSync(fileName, 'utf8');
         res.writeHead(200, { 'Content-Type': 'application/json' });
         res.write(data);
@@ -75,7 +75,7 @@ if(files && files.length > 0) {
       });
     }
     else if(extname === '.js') {
-      app.get(mapping, require(fileName));
+      app.all(mapping, require(fileName));
     }
 
 

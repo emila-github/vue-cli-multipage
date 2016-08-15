@@ -8,7 +8,7 @@ var vm = new Vue({
       $.get('/api/datatable', function(data){
         console.log(data)
       });
-      $.get('/api/add.do', function(data){
+      $.post('/api/add.do', function(data){
         console.log(data)
       });
     }
